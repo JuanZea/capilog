@@ -1,0 +1,3 @@
+<template>
+	connection error
+</template>
