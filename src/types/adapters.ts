@@ -1,6 +1,6 @@
 import { User } from '@/types/models';
 
-export interface AuthResponse {
+export declare type AuthResponse = {
 	user: User;
 	accessToken: string;
 }

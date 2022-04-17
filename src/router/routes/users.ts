@@ -1,9 +1,10 @@
+import UserShow from '@/views/users/UserShow.vue';
 import UserIndex from '@/views/users/UserIndex.vue';
 import UserCreate from '@/views/users/UserCreate.vue';
-import UserShow from '@/views/users/UserShow.vue';
 import { admin } from '../middlewares';
+import { Route } from '@/types/router';
 
-const routes = [
+const routes: Route[] = [
 	{
 		name: 'users.index',
 		path: '/users',
@@ -19,8 +20,8 @@ const routes = [
 		path: '/users/:document',
 		component: UserShow,
 	},
-]
+];
 
-export default routes.map((route) => {
-	return Object.assign(route, { beforeEnter: [admin] });
-});
+const mappedRoutes = routes.map((route) => ({ ...route, beforeEnter: [admin] }));
+
+export default mappedRoutes;

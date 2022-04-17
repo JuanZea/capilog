@@ -1,11 +1,12 @@
-import { auth } from '../middlewares';
-import HomeView from '@/views/auth/HomeView.vue';
-import ProfileView from '@/views/auth/ProfileView.vue';
+import next from './next';
 import users from './users';
 import shipments from './shipments';
-import next from './next';
+import HomeView from '@/views/auth/HomeView.vue';
+import ProfileView from '@/views/auth/ProfileView.vue';
+import { auth } from '../middlewares';
+import { Route } from '@/types/router';
 
-const routes = [
+const routes: Route[] = [
 	{
 		name: 'home',
 		path: '/home',
@@ -21,6 +22,10 @@ const routes = [
 	...next,
 ];
 
-export default routes.map((route) => {
-	return Object.assign(route, { beforeEnter: [auth] });
+const mappedRoutes = routes.map((route) => {
+	let middlewares = [auth];
+	if (route.beforeEnter) middlewares = [auth, ...route.beforeEnter];
+	return { ...route, beforeEnter: middlewares };
 });
+
+export default mappedRoutes;

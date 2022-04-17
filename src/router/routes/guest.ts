@@ -1,8 +1,9 @@
-import { guest } from '../middlewares';
-import WelcomeView from '@/views/guest/WelcomeView.vue';
 import LoginView from '@/views/guest/LoginView.vue';
+import WelcomeView from '@/views/guest/WelcomeView.vue';
+import { Route } from '@/types/router';
+import { guest } from '../middlewares';
 
-const routes = [
+const routes: Route[] = [
 	{
 		name: 'welcome',
 		path: '/',
@@ -15,6 +16,6 @@ const routes = [
 	},
 ];
 
-export default routes.map((route) => {
-	return Object.assign(route, { beforeEnter: [guest] });
-});
+const mappedRoutes = routes.map((route) => ({ ...route, beforeEnter: [guest] }));
+
+export default mappedRoutes;

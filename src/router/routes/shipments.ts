@@ -1,11 +1,12 @@
-import PendingRequestsView from '@/views/auth/PendingRequestsView.vue';
-import RequestShipmentView from '@/views/auth/RequestShipmentView.vue';
-import CheckShipmentsView from '@/views/auth/CheckShipmentsView.vue';
 import DialInView from '@/views/auth/DialInView.vue';
 import DialOutView from '@/views/auth/DialOutView.vue';
+import CheckShipmentsView from '@/views/auth/CheckShipmentsView.vue';
+import RequestShipmentView from '@/views/auth/RequestShipmentView.vue';
+import PendingRequestsView from '@/views/auth/PendingRequestsView.vue';
+import { Route } from '@/types/router';
 import { admin, coordinator, doorman, supervior } from '../middlewares';
 
-const routes = [
+const routes: Route[] = [
 	{
 		name: 'pendingRequests',
 		path: '/pending-requests',
