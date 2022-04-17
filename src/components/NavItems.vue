@@ -12,10 +12,9 @@ import {
 	GlobeIcon,
 } from '@heroicons/vue/outline';
 import { useRoute } from 'vue-router';
-import { reactive } from 'vue';
 
 const route = useRoute();
-const { name } = route;
+const { name, fullPath } = route;
 
 const sections = [
 	{
@@ -41,7 +40,7 @@ const sections = [
 ];
 
 const navs = {
-	users: { name: 'Usuarios', to: { name: 'users.index' }, icon: UsersIcon, current: name === 'users.index' },
+	users: { name: 'Usuarios', to: { name: 'users.index' }, icon: UsersIcon, current: fullPath.includes('users') },
 	routes: { name: 'Rutas', to: { name: 'routes' }, icon: GlobeIcon, current: name === 'routes' },
 	reports: { name: 'Reportes', to: { name: 'reports' }, icon: ChartBarIcon, current: name === 'reports' },
 	dialIn: { name: 'Registrar entrada', to: { name: 'dialIn' }, icon: ClipboardCopyIcon, current: name === 'dialIn' },
