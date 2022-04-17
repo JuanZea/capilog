@@ -1,4 +1,4 @@
-import { getFarmsFromFarmsResponse } from './adapters/farm';
+import { getFarmsFromFarmsResponse } from './adapters/response/farm';
 import { capilogApiInstance as service } from './instanceManager';
 
 export const farmService = {
