@@ -12,6 +12,7 @@ export const initialize = async () => {
 	await rememberAuth();
 	resolver();
 	console.log('[capilog]: initialized');
+	console.log(state);
 };
 
 const rememberAuth = async () => {
