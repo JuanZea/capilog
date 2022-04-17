@@ -11,6 +11,11 @@ import {
 	UsersIcon,
 	GlobeIcon,
 } from '@heroicons/vue/outline';
+import { useRoute } from 'vue-router';
+import { reactive } from 'vue';
+
+const route = useRoute();
+const { name } = route;
 
 const sections = [
 	{
@@ -35,34 +40,42 @@ const sections = [
 	},
 ];
 
-const adminNavs = [
-	{ name: 'Usuarios', to: '#', icon: UsersIcon, current: true },
-	{ name: 'Rutas', to: '#', icon: GlobeIcon, current: false },
-	{ name: 'Reportes', to: '#', icon: ChartBarIcon, current: false },
-	{ name: 'Registrar entrada', to: '#', icon: ClipboardCopyIcon, current: false },
-	{ name: 'Registrar salida', to: '#', icon: ClipboardCheckIcon, current: false },
-];
+const navs = {
+	users: { name: 'Usuarios', to: { name: 'users.index' }, icon: UsersIcon, current: name === 'users.index' },
+	routes: { name: 'Rutas', to: { name: 'routes' }, icon: GlobeIcon, current: name === 'routes' },
+	reports: { name: 'Reportes', to: { name: 'reports' }, icon: ChartBarIcon, current: name === 'reports' },
+	dialIn: { name: 'Registrar entrada', to: { name: 'dialIn' }, icon: ClipboardCopyIcon, current: name === 'dialIn' },
+	dialOut: {
+		name: 'Registrar salida',
+		to: { name: 'dialOut' },
+		icon: ClipboardCheckIcon,
+		current: name === 'dialOut',
+	},
+	pendingRequests: {
+		name: 'Solicitudes pendientes',
+		to: { name: 'pendingRequests' },
+		icon: FolderIcon,
+		current: name === 'pendingRequests',
+	},
+	requestShipment: {
+		name: 'Solicitar envío',
+		to: { name: 'requestShipment' },
+		icon: TicketIcon,
+		current: name === 'requestShipment',
+	},
+	checkShipments: {
+		name: 'Revisar envíos',
+		to: { name: 'checkShipments' },
+		icon: TruckIcon,
+		current: name === 'checkShipments',
+	},
+};
 
-const manageNavs = [
-	{ name: 'Solicitudes pendientes', to: '#', icon: FolderIcon, current: true },
-	{ name: 'Solicitar envío', to: '#', icon: TicketIcon, current: false },
-	{ name: 'Revisar envíos', to: '#', icon: TruckIcon, current: false },
-];
-
-const shippingManagementNavs = [
-	{ name: 'Solicitudes pendientes', to: '#', icon: FolderIcon, current: true },
-	{ name: 'Reportes', to: '#', icon: ChartBarIcon, current: false },
-];
-
-const shippingNavs = [
-	{ name: 'Solicitar envío', to: '#', icon: TicketIcon, current: true },
-	{ name: 'Revisar envíos', to: '#', icon: TruckIcon, current: false },
-];
-
-const tracingNavs = [
-	{ name: 'Registrar entrada', to: '#', icon: ClipboardCopyIcon, current: true },
-	{ name: 'Registrar salida', to: '#', icon: ClipboardCheckIcon, current: false },
-];
+const adminNavs = [navs.users, navs.routes, navs.reports, navs.dialIn, navs.dialOut];
+const manageNavs = [navs.pendingRequests, navs.requestShipment, navs.checkShipments];
+const shippingManagementNavs = [navs.pendingRequests, navs.reports];
+const shippingNavs = [navs.requestShipment, navs.checkShipments];
+const tracingNavs = [navs.dialIn, navs.dialOut];
 
 const navigation = {
 	[navSections.ADMIN]: adminNavs,

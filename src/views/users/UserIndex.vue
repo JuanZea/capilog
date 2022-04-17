@@ -3,7 +3,7 @@ import AuthLayout from '../layouts/AuthLayout.vue';
 </script>
 
 <template>
-	<AuthLayout title="Perfil">
-		<h1>Perfil</h1>
+	<AuthLayout title="Usuarios">
+		<h1>Usuarios</h1>
 	</AuthLayout>
 </template>

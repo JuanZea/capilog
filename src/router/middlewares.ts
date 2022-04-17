@@ -21,3 +21,18 @@ export const admin = (to: any, from: any, next: (payload?: any) => void) => {
 	if (actions.roles.isAdmin()) next();
 	else next({ name: 'home' });
 };
+
+export const coordinator = (to: any, from: any, next: (payload?: any) => void) => {
+	if (actions.roles.isAdmin() || actions.roles.isCoordinator()) next();
+	else next({ name: 'home' });
+};
+
+export const supervior = (to: any, from: any, next: (payload?: any) => void) => {
+	if (actions.roles.isAdmin() || actions.roles.isCoordinator() || actions.roles.isSupervisor()) next();
+	else next({ name: 'home' });
+};
+
+export const doorman = (to: any, from: any, next: (payload?: any) => void) => {
+	if (actions.roles.isAdmin() || actions.roles.isDoorman()) next();
+	else next({ name: 'home' });
+};

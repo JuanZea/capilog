@@ -9,6 +9,10 @@ import { MenuIcon, XIcon, LogoutIcon } from '@heroicons/vue/outline';
 import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue';
 
 const sidebarOpen = ref(false);
+
+defineProps<{
+	title: string;
+}>();
 </script>
 
 <template>
@@ -58,22 +62,28 @@ const sidebarOpen = ref(false);
 						</TransitionChild>
 						<div class="h-0 flex-1 overflow-y-auto pt-5 pb-4">
 							<div class="flex flex-shrink-0 items-center px-4">
-								<CapilogTitle class="text-3xl" clear />
+								<button @click="$router.push({ name: 'home' })">
+									<CapilogTitle class="text-3xl" clear />
+								</button>
 							</div>
 							<NavItems />
 						</div>
 						<div class="flex flex-shrink-0 border-t border-gray-600 bg-gray-800 p-4">
-							<a href="#" class="group block w-full flex-shrink-0">
+							<div class="group block w-full flex-shrink-0">
 								<div class="flex items-center">
-									<div>
-										<Avatar :name="state.user.name" />
-									</div>
-									<div class="ml-3">
-										<p class="text-sm font-medium text-white">{{ capitalize(state.user?.name) }}</p>
-										<p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">
-											Ver perfil
-										</p>
-									</div>
+									<button @click="$router.push({ name: 'profile' })" class="flex items-center">
+										<div>
+											<Avatar :name="state.user.name" />
+										</div>
+										<div class="ml-3">
+											<p class="text-sm font-medium text-white">
+												{{ capitalize(state.user?.name) }}
+											</p>
+											<p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">
+												Ver perfil
+											</p>
+										</div>
+									</button>
 									<div class="ml-auto">
 										<button
 											class="btn btn-danger flex gap-2 px-2 font-semibold text-white ring-offset-gray-800"
@@ -84,7 +94,7 @@ const sidebarOpen = ref(false);
 										</button>
 									</div>
 								</div>
-							</a>
+							</div>
 						</div>
 					</div>
 				</TransitionChild>
@@ -96,20 +106,28 @@ const sidebarOpen = ref(false);
 			<div class="bg-sidebar flex min-h-0 flex-1 flex-col">
 				<div class="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
 					<div class="flex flex-shrink-0 items-center px-4">
-						<CapilogTitle class="text-3xl" clear />
+						<button @click="$router.push({ name: 'home' })">
+							<CapilogTitle class="text-3xl" clear />
+						</button>
 					</div>
 					<NavItems />
 				</div>
 				<div class="flex flex-shrink-0 border-t border-gray-600 bg-gray-800 p-4">
-					<a href="#" class="group block w-full flex-shrink-0">
+					<div class="group block w-full flex-shrink-0">
 						<div class="flex items-center">
-							<div>
-								<Avatar :name="state.user.name" />
-							</div>
-							<div class="ml-3">
-								<p class="text-sm font-medium text-white">{{ capitalize(state.user?.name) }}</p>
-								<p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">Ver perfil</p>
-							</div>
+							<button @click="$router.push({ name: 'profile' })" class="flex items-center">
+								<div>
+									<Avatar :name="state.user.name" />
+								</div>
+								<div class="ml-3">
+									<p class="truncate text-sm font-medium text-white">
+										{{ capitalize(state.user?.name) }}
+									</p>
+									<p class="text-xs font-medium text-gray-300 group-hover:text-gray-200">
+										Ver perfil
+									</p>
+								</div>
+							</button>
 							<div class="ml-auto">
 								<button
 									class="btn btn-danger flex gap-2 px-2 font-semibold text-white ring-offset-gray-800"
@@ -120,7 +138,7 @@ const sidebarOpen = ref(false);
 								</button>
 							</div>
 						</div>
-					</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -138,7 +156,7 @@ const sidebarOpen = ref(false);
 			<main class="flex-1">
 				<div class="py-6">
 					<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-						<h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+						<h1 class="text-2xl font-semibold text-gray-900">{{ title }}</h1>
 					</div>
 					<div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
 						<div class="py-4">
