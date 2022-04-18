@@ -44,7 +44,7 @@ const destroy = () => {
 			</div>
 			<div class="flex gap-2">
 				<span class="font-semibold text-gray-900">Rol:</span>
-				<span v-if="actions.roles.isAdmin()" class="text-gray-500">Administrador</span>
+				<span v-if="user.role.role === 'ADMIN'" class="text-gray-500">Administrador</span>
 				<span v-else class="text-gray-500">{{ capitalize(user.role.role) }}</span>
 			</div>
 			<div class="flex gap-2">

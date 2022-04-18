@@ -11,7 +11,6 @@ const data = ref();
 
 const openModal = (payload: any) => {
 	data.value = payload;
-	console.log(data.value)
 }
 
 const refreshOrders = async () => (orders.value = await orderService.all());

@@ -45,7 +45,7 @@ defineProps<{
 							<DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
 								{{ `De ${capitalize(data.firstFarm.farm)} a ${capitalize(data.lastFarm.farm)}` }}
 								<span class="pl-2 text-sm text-gray-400">
-									{{ data.isBill ? 'Facturable' : 'No facturable' }}
+									{{ data.isBill ? 'Facturable' : '' }}
 								</span>
 								<p class="flex mt-2 items-center justify-center rounded border px-4 text-sm font-medium text-white shadow border-gray-900 bg-gray-800">
 									{{ data.statement.description }}
