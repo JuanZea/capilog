@@ -3,6 +3,7 @@ import Avatar from '../Avatar.vue';
 import { ref } from 'vue';
 import { userService } from '@/services';
 import { ChevronRightIcon, MailIcon, HomeIcon } from '@heroicons/vue/solid';
+import { capitalize } from 'lodash';
 
 const users = ref();
 const refreshUsers = async () => users.value = await userService.all();
@@ -39,7 +40,7 @@ refreshUsers();
 											class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
 											aria-hidden="true"
 										/>
-										<span class="truncate">{{ user.email }}</span>
+										<span class="truncate">{{ capitalize(user.farm.farm) }}</span>
 									</p>
 								</div>
 							</div>
