@@ -5,10 +5,12 @@ const router = useRouter();
 const route = useRoute();
 const { name } = route;
 
-const tabs = [
+const tabs: { name: string; to: { name: string } | string; current: boolean }[] = [
 	{ name: 'Listado de usuarios', to: { name: 'users.index' }, current: name === 'users.index' },
 	{ name: 'Crear un nuevo usuario', to: { name: 'users.create' }, current: name === 'users.create' },
 ];
+
+if (name === 'users.show') tabs.push({ name: 'Detalle de usuario', to: '#', current: name === 'users.show' });
 
 const go = (event: Event) => {
 	router.push(tabs[(<HTMLSelectElement>event.target).options.selectedIndex].to);
