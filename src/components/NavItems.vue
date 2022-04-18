@@ -2,7 +2,6 @@
 import { actions } from '@/store';
 import { navSections } from '@/constants';
 import {
-	ClipboardCheckIcon,
 	TruckIcon,
 	ChartBarIcon,
 	FolderIcon,
@@ -43,12 +42,11 @@ const navs = {
 	users: { name: 'Usuarios', to: { name: 'users.index' }, icon: UsersIcon, current: fullPath.includes('users') },
 	routes: { name: 'Rutas', to: { name: 'routes' }, icon: GlobeIcon, current: name === 'routes' },
 	reports: { name: 'Reportes', to: { name: 'reports' }, icon: ChartBarIcon, current: name === 'reports' },
-	dialIn: { name: 'Registrar entrada', to: { name: 'dialIn' }, icon: ClipboardCopyIcon, current: name === 'dialIn' },
-	dialOut: {
-		name: 'Registrar salida',
-		to: { name: 'dialOut' },
-		icon: ClipboardCheckIcon,
-		current: name === 'dialOut',
+	dialShipment: {
+		name: 'Marcar envío',
+		to: { name: 'dialShipment' },
+		icon: ClipboardCopyIcon,
+		current: name === 'dialShipment',
 	},
 	pendingRequests: {
 		name: 'Solicitudes pendientes',
@@ -70,11 +68,11 @@ const navs = {
 	},
 };
 
-const adminNavs = [navs.users, navs.routes, navs.reports, navs.dialIn, navs.dialOut];
+const adminNavs = [navs.users, navs.routes, navs.reports, navs.dialShipment];
 const manageNavs = [navs.pendingRequests, navs.requestShipment, navs.checkShipments];
 const shippingManagementNavs = [navs.pendingRequests, navs.reports, navs.requestShipment, navs.checkShipments];
 const shippingNavs = [navs.requestShipment, navs.checkShipments];
-const tracingNavs = [navs.dialIn, navs.dialOut];
+const tracingNavs = [navs.dialShipment];
 
 const navigation = {
 	[navSections.ADMIN]: adminNavs,

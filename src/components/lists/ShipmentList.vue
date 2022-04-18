@@ -15,6 +15,7 @@ const openModal = (payload: any) => {
 
 const refreshOrders = async () => (orders.value = await orderService.all());
 refreshOrders();
+
 const getBagColor = (status: string): string => {
 	switch (status) {
 		case orderStatus.FINISHED: {
