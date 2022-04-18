@@ -26,7 +26,7 @@ const rememberAuth = async () => {
 	else {
 		localStorage.setItem('authToken', response.data.data.accessToken);
 		updateToken(response.data.data.accessToken);
-		state.user = (await userService.show(userId)).data.data;
+		state.user = (await userService.one(userId));
 	}
 };
 
