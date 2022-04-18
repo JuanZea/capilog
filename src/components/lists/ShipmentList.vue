@@ -11,7 +11,7 @@ const data = ref();
 
 const openModal = (payload: any) => {
 	data.value = payload;
-}
+};
 
 const refreshOrders = async () => (orders.value = await orderService.all());
 refreshOrders();
@@ -42,7 +42,8 @@ const getBagColor = (status: string): string => {
 			@click="openModal(order)"
 		>
 			<div class="flex divide-x-2 divide-gray-400">
-				<MapIcon class="h-5 pr-2" />
+				<MapIcon class="h-6 pr-2" />
+				<span class="h-6 px-2">{{ order.idOrder }}</span>
 				<span class="truncate pl-2 font-medium">{{
 					`De ${capitalize(order.firstFarm.farm)} a ${capitalize(order.lastFarm.farm)}`
 				}}</span>

@@ -40,17 +40,21 @@ defineProps<{
 						leave-to="opacity-0 scale-95"
 					>
 						<div
-							class="my-8 inline-block w-full max-w-xs transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+							class="my-8 inline-block w-auto max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
 						>
 							<DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
+								<p class="text-center mb-2 bg-gray-200 border border-gray-300">{{data.idOrder}}</p>
 								{{ `De ${capitalize(data.firstFarm.farm)} a ${capitalize(data.lastFarm.farm)}` }}
 								<span class="pl-2 text-sm text-gray-400">
 									{{ data.isBill ? 'Facturable' : '' }}
 								</span>
-								<p class="flex mt-2 items-center justify-center rounded border px-4 text-sm font-medium text-white shadow border-gray-900 bg-gray-800">
+								<p
+									class="mt-2 flex items-center justify-center rounded border border-gray-900 bg-gray-800 px-4 text-sm font-medium text-white shadow"
+								>
 									{{ data.statement.description }}
 								</p>
 							</DialogTitle>
+							<p class="font-semibold mt-2">Solicitante: <span class="font-normal">{{`${data.requestUser.name} ${data.requestUser.lastname}`}}</span></p>
 							<div class="mt-2">
 								<div class="">
 									<p class="truncate text-sm font-semibold underline">Punto de recogida</p>

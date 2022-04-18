@@ -56,7 +56,7 @@ const submit = handleSubmit((values) => {
 </script>
 
 <template>
-	<Alert v-if="requested" text="Solicitud creado exitosamente" />
+	<Alert v-if="requested" text="Solicitud creada exitosamente" />
 	<div class="max-w-3xl bg-white px-4 py-5 sm:p-6">
 		<div class="mt-2 md:col-span-2 md:mt-0">
 			<form id="request" @submit.prevent="submit" action="#" method="POST">
