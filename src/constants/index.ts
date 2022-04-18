@@ -12,3 +12,10 @@ export enum navSections {
 	SHIPPING = 'Envíos',
 	TRACING = 'Seguimiento',
 }
+
+export enum orderStatus {
+	REQUESTED = 'PEDIDA',
+	FINISHED = 'TERMINADA',
+	CANCELED = 'CANCELADA',
+	ASSIGNED = 'ASIGNADA',
+}
