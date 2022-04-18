@@ -4,14 +4,14 @@ import CheckShipmentsView from '@/views/auth/CheckShipmentsView.vue';
 import RequestShipmentView from '@/views/auth/RequestShipmentView.vue';
 import PendingRequestsView from '@/views/auth/PendingRequestsView.vue';
 import { Route } from '@/types/router';
-import { admin, doorman, supervior } from '../middlewares';
+import { admin, coordinator, doorman, supervior } from '../middlewares';
 
 const routes: Route[] = [
 	{
 		name: 'pendingRequests',
 		path: '/pending-requests',
 		component: PendingRequestsView,
-		beforeEnter: [admin]
+		beforeEnter: [coordinator]
 	},
 	{
 		name: 'requestShipment',

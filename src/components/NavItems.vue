@@ -72,7 +72,7 @@ const navs = {
 
 const adminNavs = [navs.users, navs.routes, navs.reports, navs.dialIn, navs.dialOut];
 const manageNavs = [navs.pendingRequests, navs.requestShipment, navs.checkShipments];
-const shippingManagementNavs = [navs.pendingRequests, navs.reports];
+const shippingManagementNavs = [navs.pendingRequests, navs.reports, navs.requestShipment, navs.checkShipments];
 const shippingNavs = [navs.requestShipment, navs.checkShipments];
 const tracingNavs = [navs.dialIn, navs.dialOut];
 

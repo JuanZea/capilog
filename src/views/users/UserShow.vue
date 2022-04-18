@@ -6,7 +6,6 @@ import { ref } from 'vue';
 import { userService } from '@/services';
 import { TrashIcon } from '@heroicons/vue/solid';
 import { capitalize } from 'lodash';
-import { actions } from '@/store';
 
 const router = useRouter();
 const route = useRoute();
