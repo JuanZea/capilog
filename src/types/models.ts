@@ -9,6 +9,11 @@ export declare type User = {
 	createdAt: Date;
 };
 
+export declare type Role = {
+	id: string;
+	role: string;
+};
+
 export declare type Farm = {
 	idFarm: number;
 	farm: string;

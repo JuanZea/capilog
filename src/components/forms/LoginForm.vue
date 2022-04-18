@@ -11,7 +11,7 @@ import Alert from '../Alert.vue';
 
 setLocale(yupEs);
 
-const { meta, values, errors, resetForm } = useForm<{ document: string; password: string }>({
+const { meta, errors, resetForm, handleSubmit } = useForm<{ document: string; password: string }>({
 	validationSchema: object({
 		document: string().min(6).max(20).required().label('El documento'),
 		password: string().min(8).max(256).required().label('La contraseña'),
@@ -23,31 +23,38 @@ const { value: password } = useField<string>('password');
 
 const invalidData = ref(false);
 
-const login = async (event: Event) => {
-	event.preventDefault();
-	if (!meta.value.valid) return;
+const submit = handleSubmit((values) => {
+	const data = {
+		dni: values.document,
+		password: values.password,
+	};
 	authService
-		.login(values)
+		.login(data)
 		.then(actions.auth.login)
 		.catch(() => {
 			invalidData.value = true;
 			resetForm();
 		});
-};
+});
 </script>
 
 <template>
 	<div class="bg-white p-4">
 		<h1 class="text-center text-2xl font-semibold text-gray-600">Inicio de sesión</h1>
 		<hr />
-		<Alert v-if="invalidData && !meta.dirty" class="mt-4" error text="Datos erróneos. Por favor, inténtelo otra vez." />
-		<form id="login" @submit.prevent="login" class="mt-4 flex flex-col gap-4">
-			<VInput v-model="document" id="document" label="Identificación" :error="errors.document"/>
-			<VInput v-model="password" id="password" type="password" label="Contraseña" :error="errors.password"/>
+		<Alert
+			v-if="invalidData && !meta.dirty"
+			class="mt-4"
+			error
+			text="Datos erróneos. Por favor, inténtelo otra vez."
+		/>
+		<form id="login" @submit.prevent="submit" class="mt-4 flex flex-col gap-4">
+			<VInput v-model="document" id="document" label="Identificación" :error="errors.document" />
+			<VInput v-model="password" id="password" type="password" label="Contraseña" :error="errors.password" />
 			<div class="mt-4 flex flex-col">
 				<button
 					form="login"
-					:class="{ 'pointer-events-none grayscale opacity-50': !meta.valid }"
+					:class="{ 'pointer-events-none opacity-50 grayscale': !meta.valid }"
 					:disabled="!meta.valid"
 					class="btn btn-primary grid grid-cols-3 font-semibold text-white"
 				>

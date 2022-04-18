@@ -23,12 +23,16 @@ const updateModelValue = (event: Event) => {
 		</label>
 		<div class="flex flex-col">
 			<select
+				:id="id"
+				:name="id"
+				:value="modelValue"
 				:class="
 					error
 						? 'border-red-300 bg-red-50 text-red-500 focus:border-red-500 focus:ring-red-500'
 						: 'border-gray-300 focus:border-gray-500 focus:ring-gray-500'
 				"
 				class="block w-full rounded-md shadow-sm sm:text-sm"
+				@change="updateModelValue"
 			>
 				<slot />
 			</select>

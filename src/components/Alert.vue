@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
 	<div
-		class="mb-2 flex gap-2 rounded border bg-opacity-70 text-sm items-center"
+		class="mb-2 flex items-center gap-2 rounded border bg-opacity-70 text-sm"
 		:class="[
 			slim ? 'px-2 py-1' : 'px-6 py-3',
 			error ? 'border-red-600 bg-red-50 text-red-600' : 'border-green-600 bg-green-50 text-green-600',

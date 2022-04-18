@@ -1,4 +1,4 @@
-import { getUsersFromUsersResponse } from './adapters/response/users';
+import { getUsersFromUsersResponse } from './adapters/user';
 import { capilogApiInstance as service } from './instanceManager';
 
 export const userService = {

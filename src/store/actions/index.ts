@@ -1,4 +1,4 @@
-import { authService, userService } from '@/services';
+import { authService, farmService, userService, roleService } from '@/services';
 import { updateToken } from '@/services/instanceManager';
 import state from '../state';
 
@@ -11,6 +11,7 @@ export const isInitialized = new Promise((resolve) => (resolver = () => resolve(
 export const initialize = async () => {
 	await rememberAuth();
 	resolver();
+	await mountSources();
 	console.log('[capilog]: initialized');
 	console.log(state);
 };
@@ -28,3 +29,17 @@ const rememberAuth = async () => {
 		state.user = (await userService.show(userId)).data.data;
 	}
 };
+
+export const mountSources = async () => {
+	if (!state.user) return;
+	await mountFarms();
+	await mountRoles();
+}
+
+const mountFarms = async () => {
+	state.farms = await farmService.all();
+}
+
+const mountRoles = async () => {
+	state.roles = await roleService.all();
+}
