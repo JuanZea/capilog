@@ -3,12 +3,30 @@ import { TransitionRoot, TransitionChild, Dialog, DialogOverlay, DialogTitle } f
 import { capitalize } from 'lodash';
 import { formatDistance, format } from 'date-fns';
 import { es } from 'date-fns/locale';
+import { state } from '@/store';
+import { roles, orderStatus } from '@/constants';
+import { orderService } from '@/services';
 
 defineEmits<{ (event: 'close'): void }>();
-
-defineProps<{
+const props = defineProps<{
 	data: any;
 }>();
+
+const assignStatus = () => {
+	orderService.updateStatus(props.data.idOrder, orderStatus.ASSIGNED)
+	window.location.reload()
+}
+
+const finishStatus = () => {
+	orderService.updateStatus(props.data.idOrder, orderStatus.FINISHED)
+	window.location.reload()
+}
+
+const cancelledStatus = () => {
+	orderService.updateStatus(props.data.idOrder, orderStatus.CANCELED)
+	window.location.reload()
+}
+
 </script>
 
 <template>
@@ -43,18 +61,53 @@ defineProps<{
 							class="my-8 inline-block w-auto max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
 						>
 							<DialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
-								<p class="text-center mb-2 bg-gray-200 border border-gray-300">{{data.idOrder}}</p>
+								<p class="mb-2 border border-gray-300 bg-gray-200 text-center">{{ data.idOrder }}</p>
 								{{ `De ${capitalize(data.firstFarm.farm)} a ${capitalize(data.lastFarm.farm)}` }}
 								<span class="pl-2 text-sm text-gray-400">
 									{{ data.isBill ? 'Facturable' : '' }}
 								</span>
+								<button
+									@click="assignStatus"
+									v-if="
+										state.user?.role.role === roles.ADMIN ||
+										state.user?.role.role === roles.COORDINATOR
+									"
+									class="group flex w-full items-center border-gray-600 bg-gray-500 justify-center rounded-t border px-4 text-sm font-medium text-white shadow hover:brightness-150 active:scale-95"
+								>
+									<span>{{ 'ASIGNAR' }}</span>
+								</button>
+								<button
+									@click="finishStatus"
+									v-if="
+										state.user?.role.role === roles.ADMIN ||
+										state.user?.role.role === roles.COORDINATOR
+									"
+									class="group flex w-full items-center border-gray-600 bg-gray-500 justify-center border px-4 text-sm font-medium text-white shadow hover:brightness-150 active:scale-95"
+								>
+									<span>{{ 'TERMINAR' }}</span>
+								</button>
+								<button
+									@click="cancelledStatus"
+									v-if="
+										state.user?.role.role === roles.ADMIN ||
+										state.user?.role.role === roles.COORDINATOR
+									"
+									class="group flex w-full items-center border-gray-600 bg-gray-500 justify-center rounded-b border px-4 text-sm font-medium text-white shadow hover:brightness-150 active:scale-95"
+								>
+									<span>{{ 'CANCELAR' }}</span>
+								</button>
 								<p
 									class="mt-2 flex items-center justify-center rounded border border-gray-900 bg-gray-800 px-4 text-sm font-medium text-white shadow"
 								>
 									{{ data.statement.description }}
 								</p>
 							</DialogTitle>
-							<p class="font-semibold mt-2">Solicitante: <span class="font-normal">{{`${data.requestUser.name} ${data.requestUser.lastname}`}}</span></p>
+							<p class="mt-2 font-semibold">
+								Solicitante:
+								<span class="font-normal">{{
+									`${data.requestUser.name} ${data.requestUser.lastname}`
+								}}</span>
+							</p>
 							<div class="mt-2">
 								<div class="">
 									<p class="truncate text-sm font-semibold underline">Punto de recogida</p>

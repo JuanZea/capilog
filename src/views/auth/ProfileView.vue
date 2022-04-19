@@ -5,7 +5,7 @@ import AuthLayout from '../layouts/AuthLayout.vue';
 </script>
 
 <template>
-	<AuthLayout :title="`${state.user.name} ${state.user.lastname}`">
+		<AuthLayout :title="`${state.user.name} ${state.user.lastname}`">
 		<div v-if="state.user" class="flex flex-col gap-4">
 			<div class="flex gap-2">
 				<span class="font-semibold text-gray-900">Correo electrónico:</span>
@@ -27,7 +27,7 @@ import AuthLayout from '../layouts/AuthLayout.vue';
 			<div class="flex gap-2">
 				<span class="font-semibold text-gray-900">Finca:</span>
 				<span class="text-gray-500">{{
-					`${capitalize(state.user.farm.farm)} (${capitalize(state.user.farm.location)})`
+					`${capitalize(state.user.farm.farm as unknown as string)} (${capitalize((state.user.farm as unknown as any).location)})`
 				}}</span>
 			</div>
 		</div>

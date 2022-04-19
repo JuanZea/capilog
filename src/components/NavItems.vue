@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { actions } from '@/store';
-import { navSections } from '@/constants';
+import { navSections, orderStatus } from '@/constants';
 import {
 	TruckIcon,
 	ChartBarIcon,
@@ -11,6 +11,8 @@ import {
 	GlobeIcon,
 } from '@heroicons/vue/outline';
 import { useRoute } from 'vue-router';
+import { ref } from 'vue';
+import { orderService } from '@/services';
 
 const route = useRoute();
 const { name, fullPath } = route;
@@ -81,6 +83,11 @@ const navigation = {
 	[navSections.SHIPPING]: shippingNavs,
 	[navSections.TRACING]: tracingNavs,
 };
+
+const total = ref();
+orderService.all(orderStatus.REQUESTED).then((response) => {
+	total.value = response.length;
+});
 </script>
 
 <template>
@@ -103,6 +110,7 @@ const navigation = {
 						]"
 					>
 						<component
+							v-if="item.to.name !== 'pendingRequests'"
 							:is="item.icon"
 							:class="[
 								item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
@@ -110,7 +118,22 @@ const navigation = {
 							]"
 							aria-hidden="true"
 						/>
-						{{ item.name }}
+						<component
+							v-if="item.to.name === 'pendingRequests' && !total"
+							:is="item.icon"
+							:class="[
+								item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
+								'mr-4 h-6 w-6 flex-shrink-0',
+							]"
+							aria-hidden="true"
+						/>
+						<p
+							class="mr-4 rounded-full bg-white px-2 font-bold text-gray-800"
+							v-if="item.to.name === 'pendingRequests' && total"
+						>
+							{{ total }}
+						</p>
+						<span class="truncate">{{ item.name }}</span>
 					</router-link>
 				</div>
 			</div>

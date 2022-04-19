@@ -41,5 +41,6 @@ const mountFarms = async () => {
 }
 
 const mountRoles = async () => {
+	if (state.user?.role.role !== 'ADMIN') return;
 	state.roles = await roleService.all();
 }

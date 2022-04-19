@@ -73,7 +73,7 @@ defineProps<{
 								<div class="flex items-center">
 									<button @click="$router.push({ name: 'profile' })" class="flex items-center">
 										<div>
-											<Avatar :name="state.user.name" />
+											<Avatar :name="state.user?.name" />
 										</div>
 										<div class="ml-3">
 											<p class="text-sm font-medium text-white">
@@ -117,7 +117,7 @@ defineProps<{
 						<div class="flex items-center">
 							<button @click="$router.push({ name: 'profile' })" class="flex items-center">
 								<div>
-									<Avatar :name="state.user.name" />
+									<Avatar :name="state.user?.name" />
 								</div>
 								<div class="ml-3">
 									<p class="truncate text-sm font-medium text-white">
