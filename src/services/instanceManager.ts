@@ -10,6 +10,7 @@ export const capilogApiInstance = axios.create({
 
 capilogApiInstance.interceptors.response.use(undefined, (error) => {
 	if (!error.response) state.errors.server = true;
+	console.log(state.errors.server)
 	return Promise.reject(error);
 });
 
